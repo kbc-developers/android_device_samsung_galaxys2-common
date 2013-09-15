@@ -174,6 +174,9 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.bootloader.mode=download
+
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # Include exynos4 platform specific parts
