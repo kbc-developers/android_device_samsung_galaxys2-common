@@ -17,13 +17,17 @@ COMMON_PATH := device/samsung/galaxys2-common
 
 DEVICE_PACKAGE_OVERLAYS := $(COMMON_PATH)/overlay
 
-# Init files
+# Rootdir
 PRODUCT_COPY_FILES := \
     $(COMMON_PATH)/rootdir/fstab.smdk4210:root/fstab.smdk4210 \
     $(COMMON_PATH)/rootdir/lpm.rc:root/lpm.rc \
     $(COMMON_PATH)/rootdir/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     $(COMMON_PATH)/rootdir/init.smdk4210.rc:root/init.smdk4210.rc \
     $(COMMON_PATH)/rootdir/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
+
+# Recovery rootdir
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/init.recovery.smdk4210.rc:root/init.recovery.smdk4210.rc
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -110,7 +114,7 @@ PRODUCT_COPY_FILES += \
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072 \
-    hwui.render_dirty_regions=false \
+    debug.hwui.render_dirty_regions=false \
     ro.bq.gpu_to_cpu_unsupported=1
 
 # RIL
@@ -184,5 +188,5 @@ TARGET_HAL_PATH := hardware/samsung/exynos4/hal
 TARGET_OMX_PATH := hardware/samsung/exynos/multimedia/openmax
 $(call inherit-product, hardware/samsung/exynos4210.mk)
 
-# Use the non-open-source parts, if they're present
--include vendor/samsung/galaxys2-common/common-vendor.mk
+# Include non-open-source parts
+$(call inherit-product, vendor/samsung/galaxys2-common/common-vendor.mk)
